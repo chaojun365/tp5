@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/static/chat/font_Icon/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/static/chat/css/chat.css">
+    <link rel="stylesheet" type="text/css" href="static/fy/css/fy-alert.css">
+    <link rel="stylesheet" type="text/css" href="static/fy/css/demo.css">
+    <link href="/static/showloading/css/loading.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" href="/static/css/nav.css">
+
+    <!-- <link href="/static/loading/jquery.shCircleLoader.css" rel="stylesheet" media="screen" /> -->
+    <!-- <link rel="stylesheet" href="/static/top/css/jquery.xctips.css" />
+    <script type="text/javascript" src="/static/top/js/jquery.xctips.js"></script> -->
+<style>
+    *{padding:0; margin:0}
+     div.v{width:200px; margin:0 auto; background:#060; color:#FFF; text-align:center; margin-top:10px; padding:10px; cursor:pointer}
+
+</style>
+<style>
+.dropbtn {
+    //background-color: #4CAF50;
+    color: white;
+    padding-right: 10px;
+    //font-size: 10px;
+    border: none;
+    cursor: pointer;
+    vertical-align:middle;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+}
+
+.dropdown-content a {
+    //padding: 0px;
+    font-size: 12px;
+    color: black;
+    //padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    //background-color: #3e8e41;
+}
+</style>
+
+</head>
+<body class="bd">
+
+<div  class="chatContainer">
+  <div class="Btn">
+    <div class="chatBtn" style="z-index: 9999">
+        <i class="iconfont icon-xiaoxi1"></i>
+    </div>
+    <div class="chat-message-num" id="chatmessage" style="z-index: 9999" ></div>
+  </div>
+    <div class="chatBox" ref="chatBox">
+        <div class="chatBox-head">
+            <div class="chatBox-head-one">
+                {$umsg.username}
+                <!-- <div class="chat-close" style="margin: 10px 10px 0 0;font-size: 14px">关闭</div> -->
+                <div class="dropdown" style="float:right;z-index: 9999">
+                  <img class="dropbtn" style="width: 32px" src="/static/img/qq.png">
+                  <div class="dropdown-content" >
+                    <a href="/seachuser" style="padding: 0px">添加好友</a>
+                    <a id="myset">我的</a>
+                    <a href="#">退出</a>
+                  </div>
+                </div>
+            </div>
+            <div class="chatBox-head-two">
+                <div class="chat-return">返回</div>
+                <div class="chat-people" id="getinfo">
+                    <div class="ChatInfoHead">
+                        <img src="" alt="头像"/>
+                    </div>
+                    <div class="ChatInfoName">这是用户的名字，看看名字到底能有多长</div>
+                </div>
+                <div class="chat-close">退出</div>
+            </div>
+        </div>
+        <div class="chatBox-info">
+          
+            <div class="chatBox-list" ref="chatBoxlist">
+              {volist name="friendslist" id="news"}
+                <div onclick="chat({$news.friends_id})" class="chat-list-people" style="border-bottom:1px solid #EFEFEF;">
+                    <div><img src="{$news.info.head_img}" alt="头像"/></div>
+                    <div class="chat-name">
+                        <p>{$news.nickname}</p>
+                        <p id='info{$news.friends_id}'>{$news.info.sign}</p>
+                    </div>
+                    <div class="message-num" id='{$news.friends_id}'></div>        
+                </div>
+              {/volist}
+            </div>
+            <!-- 系统消息 -->
+            
+              <div class="info-box" style="overflow-y: scroll;height: 500px;">
+                    
+              </div>
+            
+           
+            <div class="chatBox-kuang" ref="chatBoxkuang">
+                <div class="chatBox-content">
+                    <div class="chatBox-content-demo" id="chatBox-content-demo">
+
+                       
+
+                    </div>
+                </div>
+                <div class="chatBox-send">
+                    <div class="div-textarea" contenteditable="true"></div>
+                    <div>
+                        <button id="chat-biaoqing" class="btn-default-styles">
+                            <i class="iconfont icon-biaoqing"></i>
+                        </button>
+                        <label id="chat-tuxiang" title="发送图片" for="inputImage" class="btn-default-styles">
+                            <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png"
+                                   name="file" id="inputImage" class="hidden">
+                            <i class="iconfont icon-tuxiang"></i>
+                        </label>
+                        <button id="chat-fasong" class="btn-default-styles"><i class="iconfont icon-fasong"></i>
+                        </button>
+                    </div>
+                    <div class="biaoqing-photo">
+                        <ul>
+                            <li><span class="emoji-picker-image" style="background-position: -9px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -40px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -71px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -102px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -133px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -164px -18px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -9px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -40px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -71px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -102px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -133px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -164px -52px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -9px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -40px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -71px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -102px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -133px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -164px -86px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -9px -120px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -40px -120px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -71px -120px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -102px -120px;"></span>
+                            </li>
+                            <li><span class="emoji-picker-image" style="background-position: -133px -120px;"></span>
+                            </li>
+                            <li><span class="emoji-picker-image" style="background-position: -164px -120px;"></span>
+                            </li>
+                            <li><span class="emoji-picker-image" style="background-position: -9px -154px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -40px -154px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -71px -154px;"></span></li>
+                            <li><span class="emoji-picker-image" style="background-position: -102px -154px;"></span>
+                            </li>
+                            <li><span class="emoji-picker-image" style="background-position: -133px -154px;"></span>
+                            </li>
+                            <li><span class="emoji-picker-image" style="background-position: -164px -154px;"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span id ="maxid" style="visibility:hidden">0</span>
+<span id ="sysid" style="visibility:hidden">0</span>
+<span id ="fid" style="visibility:hidden"></span>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+<script src="/static/showloading/js/loading.js"></script>
+<!-- <script src="/static/js/jquery.shCircleLoader-min.js"></script> -->
+<script>
+    
+    screenFuc();
+    function screenFuc() {
+        var topHeight = $(".chatBox-head").innerHeight();//聊天头部高度
+        //屏幕小于768px时候,布局change
+        var winWidth = $(window).innerWidth();
+        if (winWidth <= 768) {
+            var totalHeight = $(window).height(); //页面整体高度
+            $(".chatBox-info").css("height", totalHeight - topHeight);
+            var infoHeight = $(".chatBox-info").innerHeight();//聊天头部以下高度
+            //中间内容高度
+            $(".chatBox-content").css("height", infoHeight - 46);
+            $(".chatBox-content-demo").css("height", infoHeight - 46);
+
+            $(".chatBox-list").css("height", totalHeight - topHeight);
+            $(".chatBox-kuang").css("height", totalHeight - topHeight);
+            $(".div-textarea").css("width", winWidth - 106);
+        } else {
+            $(".chatBox-info").css("height", 495);
+            $(".chatBox-content").css("height", 448);
+            $(".chatBox-content-demo").css("height", 448);
+            $(".chatBox-list").css("height", 495);
+            $(".chatBox-kuang").css("height", 495);
+            $(".div-textarea").css("width", 260);
+        }
+    }
+    (window.onresize = function () {
+        screenFuc();
+    })();
+    //未读信息数量为空时
+    var totalNum = $(".chat-message-num").html();
+    if (totalNum == "") {
+        $(".chat-message-num").css("padding", 0);
+    }
+    $(".message-num").each(function () {
+        var wdNum = $(this).html();
+        if (wdNum == "") {
+            $(this).css("padding", 0);
+        }
+    });
+    //退出账号
+    $(".chat-close").click(function () {
+        //$(".chatBox").toggle(10);
+        $.post('index/index/signout',{"token":"out"}).then(function(res){
+            if (res) {
+                fyAlert.msg("退出成功！",{icon:1,animateType:1} )
+                  window.setTimeout(function(){
+                    //sessionStorage.removeItem('user_info');
+                    document.location.href = '/login';
+                  },1500);                 
+            }
+           
+        })
+
+    })
+    //进聊天页面
+    $(".chat-list-people").each(function () {
+        $(this).click(function () {
+            var n = $(this).index();
+            $(".chatBox-head-one").toggle();
+            $(".chatBox-head-two").toggle();
+            $(".chatBox-list").fadeToggle(1);
+            $(".chatBox-kuang").fadeToggle();
+            $(".info-box").fadeToggle();
+
+            //传名字
+            $(".ChatInfoName").text($(this).children(".chat-name").children("p").eq(0).html());
+
+            //传头像
+            $(".ChatInfoHead>img").attr("src", $(this).children().eq(0).children("img").attr("src"));
+
+            //聊天框默认最底部
+            $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+            });
+        })
+    });
+
+    //返回列表
+    $(".chat-return").click(function () {
+        $(".chatBox-head-one").toggle(1);
+        $(".chatBox-head-two").toggle(1);
+        $(".chatBox-list").fadeToggle(1);
+        $(".chatBox-kuang").fadeToggle(1);
+        $(".chatBox-content-demo").children().remove(); 
+        //刷新页面
+        location.reload(true);
+        //清除角标         
+        /*var id = document.getElementById("fid").innerHTML;     
+        document.getElementById(id).innerHTML ="";
+        document.getElementById(id).style.cssText="padding:0px;";
+        document.getElementById("fid").innerHTML="";*/
+        //document.getElementById("fid").innerHTML="0";
+
+    });
+
+    //      发送信息
+    $("#chat-fasong").click(function () {
+        /*setTimeout(fyAlert.msg("发送失败!",{icon:3,animateType:3} ),5000);
+        return false;*/
+        var times=Date.parse(new Date())/1000;
+        var textContent = $(".div-textarea").html().replace(/[\n\r]/g, '<br>')
+        if (textContent != "") {
+            $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(times)+"</small> </div> " +
+                "<div class=\"right\"> <div class=\"chat-message\"> " + textContent + " </div> " +
+                "<div class=\"chat-avatars\"><img src=\"{$umsg.head_img}\" alt=\"头像\" /></div> </div> </div>");
+            //将信息发送至服务器
+            var fid =document.getElementById("fid").innerHTML;
+            $.post('index/index/sendmsg',{"fid":fid,"content":textContent,"type":1}).then(function(res){
+
+               if(res.status==0){
+                    //fyAlert.msg(res.msg,{icon:1,animateType:1} )
+               }else{
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                                    
+               }
+
+            })
+            //发送后清空输入框
+            $(".div-textarea").html("");
+            //聊天框默认最底部
+            $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+            });
+        }
+    });
+
+    //      发送表情
+    $("#chat-biaoqing").click(function () {
+        $(".biaoqing-photo").toggle();
+    });
+    $(document).click(function () {
+        $(".biaoqing-photo").css("display", "none");
+    });
+    $("#chat-biaoqing").click(function (event) {
+        event.stopPropagation();//阻止事件
+    });
+
+    $(".emoji-picker-image").each(function () {
+        $(this).click(function () {
+            var times=Date.parse(new Date())/1000;
+            var bq = $(this).parent().html();
+            //console.log(bq)
+            $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(times)+"</small> </div> " +
+                "<div class=\"right\"> <div class=\"chat-message\"> " + bq + " </div> " +
+                "<div class=\"chat-avatars\"><img src=\"{$umsg.head_img}\" alt=\"头像\" /></div> </div> </div>");
+
+            //将信息发送至服务器
+            var fid =document.getElementById("fid").innerHTML;
+            $.post('index/index/sendmsg',{"fid":fid,"content":bq,"type":3}).then(function(res){
+
+               if(res.status==0){
+                    //fyAlert.msg(res.msg,{icon:1,animateType:1} )
+               }else{
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                                    
+               }
+
+            })
+            //发送后关闭表情框
+            $(".biaoqing-photo").toggle();
+            //聊天框默认最底部
+            $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+            });
+        })
+    });
+
+    //      发送图片
+    function selectImg(pic) {
+        //显示遮罩
+        loading.showLoading({
+            type:3,
+            tip:"发送中"
+        })
+        if (!pic.files || !pic.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var times=Date.parse(new Date())/1000;
+            var images = evt.target.result;
+            //console.log(images);
+            $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(times)+"</small> </div> " +
+                "<div class=\"right\"> <div class=\"chat-message\"><img src=" + images + "></div> " +
+                "<div class=\"chat-avatars\"><img src=\"{$umsg.head_img}\" alt=\"头像\" /></div> </div> </div>");
+
+            //将信息发送至服务器
+            var fid =document.getElementById("fid").innerHTML;
+             
+            $.post('index/index/upload',{"fid":fid,"images":images,"type":2}).then(
+                function(res){
+                //去除遮罩
+                loading.hideLoading();
+               if(res.status==0){
+                    //fyAlert.msg(res.msg,{icon:1,animateType:1} )
+               }else{
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                                    
+               }
+
+            })
+            //聊天框默认最底部
+            $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+            });
+            
+        };
+        reader.readAsDataURL(pic.files[0]);
+
+    }
+    //将时间戳转为日期
+    function to_date(phpstr) {
+            str = parseInt(phpstr) * 1000;//将php时间戳转化为整形并乘以1000
+            var newDate = new Date(str);
+            var year = newDate.getUTCFullYear();//取年份
+            var month = newDate.getUTCMonth() + 1;//取月份
+            var nowday = newDate.getUTCDate();//取天数
+            var hours = newDate.getHours();//取小时
+            var minutes = newDate.getMinutes();//取分钟
+            var seconds = newDate.getSeconds();//取秒
+            return year + "/" + month + "/" + nowday + " " + getzf(hours) + ":" + getzf(minutes) + ":" + getzf(seconds);//拼接 2017-2-21 12:23:43    
+    } 
+
+          //补0操作
+  function getzf(num){  
+            if(parseInt(num) < 10){  
+                num = '0'+num;  
+            }  
+            return num;  
+  }
+ 
+var timer01;
+//点击用户头像
+function chat(id){
+      //
+      document.getElementById("fid").innerHTML =id;
+      //清除角标
+      document.getElementById(id).innerHTML ="";
+      document.getElementById(id).style.cssText="padding:0px;";
+      //
+      $(".Btn").toggle();
+      $(".chat-message-num").css("display", "none");
+      var maxid =document.getElementById("maxid").innerHTML;
+      //console.log(maxid);
+      //显示遮罩
+        loading.showLoading({
+            type:5,
+            tip:"载入中"
+        }) 
+      $.post('index/index/checkfriends',{"fid":id,"id":maxid}).then(function(res){
+             //去除遮罩
+             loading.hideLoading();
+             //console.log(res);
+             if(res){
+                
+                 res.forEach(function(element){
+                        //console.log(element);
+                  if(element.uid==id){
+                       //console.log(element);
+                        //获取顶部头像地址
+                        var img = $(".ChatInfoHead>img").attr("src")
+                        $(".chatBox-content-demo").append("<div  class=\"clearfloat\">"+
+                                                    "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(element.send_time)+"</small></div>"+
+                                                      "<div class=\"left\"><div class=\"chat-avatars\"><img src="+img+" alt=\"头像\"/></div>"+"<div class=\"chat-message\">"+element.content+"</div></div></div>");
+                 }else if(element.uid == {$umsg.id}){
+                       $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                    "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(element.send_time)+"</small> </div> " +
+                    "<div class=\"right\"> <div class=\"chat-message\"> " +element.content+ " </div> " +
+                    "<div class=\"chat-avatars\"><img src=\"{$umsg.head_img}\" alt=\"头像\" /></div> </div> </div>");  
+                        
+
+                 }
+                }); 
+    
+       }      
+ 
+//定时获取数据
+ timer01 = setInterval(function star() {
+
+          $.post('index/index/fsmsg',{"fid":id,"id":maxid}).then(function(res){
+  
+              //console.log(res);
+              if (res) {
+                res.forEach(function(element) {
+                  // console.log(element);
+                   var img = $(".ChatInfoHead>img").attr("src")
+                    $(".chatBox-content-demo").append("<div  class=\"clearfloat\">"+
+                                                "<div class=\"author-name\"><small class=\"chat-date\">"+to_date(element.send_time)+"</small></div>"+
+                                                  "<div class=\"left\"><div class=\"chat-avatars\"><img src="+img+" alt=\"头像\"/></div>"+"<div class=\"chat-message\">"+element.content+"</div></div></div>");
+
+                                    //聊天框默认最底部
+                                 $(document).ready(function () {
+                                        $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                                 });
+                    });
+                    
+                  }
+                  
+             })
+             
+},1000);
+        //聊天框默认最底部
+         $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+        });
+         
+  })
+        
+}
+
+var timer02;
+//定时获取数据
+ $(document).ready(function () {
+       timer02= setInterval("startRequest()",1500);
+}); 
+
+function startRequest() {
+ 
+             var id =document.getElementById("maxid").innerHTML;
+
+             //console.log(id);
+         //xcsoft.success('xxx',3000)
+          $.post('index/index/msg',{"id":id}).then(function(res){
+
+              if(res.status==3&&res.err==1){
+                  clearTimeout(timer01);
+                  clearTimeout(timer02);
+                  //fyAlert.msg("账号在其他设备登入!",{icon:2,animateType:2,time: 5000} )
+                  //刷新页面
+                  // location.reload(true);
+                  fyAlert.alert({
+
+                        closeBtn : true,
+
+                        skin     : 'fyAlert-blue',
+
+                        content  : '账号已在其他设备登录!<br>如非本人操作请尽快修改密码!<a style="color:red" href="/login">立即修改</a>',
+                        //
+                        shadowClose : false,
+
+                        area : ['200px','180px'],
+
+                        btns     : {                  //按钮组
+
+                            '确定' : function(obj){
+
+                                //刷新页面
+                                location.reload(true);
+
+                            }
+
+                        }
+
+                  })
+              }else{
+                  
+                res.forEach(function(element) {
+                  if(element.type!=4){
+                      //console.log(res);
+                      var msgid   = element.uid;
+                      var maxid   = element.id;
+                      var content = element.content;
+                      document.getElementById("maxid").innerHTML = maxid;
+                      //console.log(maxid);
+                      //fyAlert.msg(content,{icon:1,animateType:1} )
+                      //$('#msgid').val(content);
+                      var s1 = 'info' , s2 = msgid;
+                      var s3 = s1+s2;
+                      //console.log(s3);
+                      if ($("#"+s3).length > 0){
+                          document.getElementById(s3).innerHTML =content;
+                          //console.log(element);                      
+                          var i =0;
+                              i++;   
+                          var aa =document.getElementById(msgid).innerHTML;
+                          //document.getElementById("maxid").innerHTML = maxid;
+                          document.getElementById(msgid).innerHTML = Number(aa)+i;     
+                          document.getElementById(msgid).style.cssText="display: inline-block;height: auto;min-width: 10px;margin-top: 25px;padding: 3px 5px;font-size: 12px;font-weight: 700;line-height: 1;text-align: center;white-space: nowrap;vertical-align: color: #fff;background: #f46266;float: right;"
+                      }    
+                  }  
+            });
+                
+                  
+                /*  if(element.type==4){
+                    var aa =document.getElementById("chatmessage").innerHTML;
+                    $('.chat-message-num').text(Number(aa)+i);
+                    //document.getElementById("chatmessage").innerHTML ="10";
+                    document.getElementById("chatmessage").style.cssText="display: inline-block; height: auto;min-width: 10px;padding: 3px 5px;font-size: 12px;font-weight: 700;line-height: 1;text-align: center;white-space: nowrap;vertical-align: middle;border-radius: 10px;margin-right: 15px; margin-top: 14px;color: #fff;background: #f46266;position: absolute;bottom: 40px;right: -24px;z-index:9999;"
+                     return false;
+                  }*/
+   
+                  
+                  
+     
+                   
+
+              }
+
+       })
+        // 
+        id =document.getElementById("sysid").innerHTML;
+        $.post('index/index/Syscount',{"id":id}).then(function(res){
+            //console.log(res);
+            if(res.status==2&&res.type==3){
+                return false;
+            }
+                    //$('.chat-message-num').text(Number(aa)+i);
+                    document.getElementById("chatmessage").innerHTML =res;
+                    document.getElementById("chatmessage").style.cssText="display: inline-block; height: auto;min-width: 10px;padding: 3px 5px;font-size: 12px;font-weight: 700;line-height: 1;text-align: center;white-space: nowrap;vertical-align: middle;border-radius: 10px;margin-right: 15px; margin-top: 14px;color: #fff;background: #f46266;position: absolute;bottom: 40px;right: -24px;z-index:9999;"
+                   
+            });    
+}
+
+    //打开/关闭聊天框
+    $(".chatBtn").click(function () {
+            $(".chat-people").toggle(10);
+            $(".dropdown").toggle(10);
+            $(".chatBox-head-two").toggle(10);
+            $(".Btn").toggle(10);
+            $(".chatBox-head-one").text("系统消息");
+            $(".chatBox-list").toggle(10);
+            /*setInterval(function time2() {},1500);*/
+            var id =document.getElementById("sysid").innerHTML;
+            $.post('index/index/symsg',{"id":id}).then(function(res){
+               if(res.status==3&&res.type==4){
+                 //alert("not info");
+                 return false;
+               }
+               //
+               res.forEach(function(element) {
+                      console.log(element);
+                      /*content: null
+                        id: 1
+                        receiver_id: 1
+                        send_id: 2
+                        send_time: 1699999999
+                        status: 1
+                        type: 2*/
+                        var username    = element.username.username;
+                        var msgid  = element.id; 
+                        var times  = element.send_time;
+                        var type   = element.type;
+                        var status = element.status;
+                        var send_id= element.send_id;
+                        var id     = element.id;
+                        var content= element.content;
+                        var uid    = {$umsg.id};
+                    if(type==0&&status==0){
+                        document.getElementById("sysid").innerHTML = msgid;
+                      $(".info-box").append("<div class=\"info-message-sys\" id="+id+" ><div class=\"info-message-title\"> 系统消息<span class=\"info-message-time\">"+to_date(times)+"</span></div><div onclick=\"info("+send_id+")\" class=\"info-message-id\"><div><img class=\"info-message-head\" src=\"/static/img/system.png\" alt=\"头像\"/><span class=\"info-message-name\">"+username +"请求加你为好友</span></div></div><div  class=\"info-message-text\"><div>"+content+"</div></div><div  class=\"info-message-bnt\" ><input onclick=\"affirm("+id+")\" class=\"info-message-bnt-accept\" type=\"submit\" name=\"accept\" value=\"接受\">       </div><div class=\"info-message-bnt\" ><input onclick=\"cancel("+id+")\" class=\"info-message-bnt-cancel\" type=\"submit\" name=\"cancel\" value=\"拒绝\"></div></div>")
+                    }
+                    if(type==1&&status==0){
+                          //fyAlert.msg("对方已同意你的好友请求!",{icon:1,animateType:1} )
+                          $(".info-box").append("<div class=\"info-message-sys\" id="+id+" ><div class=\"info-message-title\"><span> 系统消息</span><span ><img onclick=\"clean("+id+")\" class=\"info-message-img\" src=\"/static/img/close_icon.png\"></span></div><div onclick=\"info("+send_id+")\" class=\"info-message-id\"><div><img class=\"info-message-head\" src=\"/static/img/system.png\" alt=\"头像\"/><span class=\"info-message-name\">"+username +"已同意你的好友请求!</span></div></div><div style=\"padding-top:10px;padding-bottom:10px;\"><span class=\"info-message-time-left\">"+to_date(times)+"</span></div></div>")
+                    }
+                    if(type==1&&status==1){
+                          //fyAlert.msg("你已同意对方的好友请求!",{icon:1,animateType:1} )
+                          $(".info-box").append("<div class=\"info-message-sys\" id="+id+" ><div class=\"info-message-title\"><span> 系统消息</span><span ><img onclick=\"clean("+id+")\" class=\"info-message-img\" src=\"/static/img/close_icon.png\"></span></div><div onclick=\"info("+send_id+")\" class=\"info-message-id\"><div><img class=\"info-message-head\" src=\"/static/img/system.png\" alt=\"头像\"/><span class=\"info-message-name\">你已同意"+username +"的好友请求!</span></div></div><div style=\"padding-top:10px;padding-bottom:10px;\"><span class=\"info-message-time-left\">"+to_date(times)+"</span></div></div>")
+                    }
+                    if(type==2&&status==0){
+                          //fyAlert.msg("对方已拒绝你的好友请求!",{icon:1,animateType:1} )
+                          $(".info-box").append("<div class=\"info-message-sys\" id="+id+" ><div class=\"info-message-title\"><span> 系统消息</span><span ><img onclick=\"clean("+id+")\" class=\"info-message-img\" src=\"/static/img/close_icon.png\"></span></div><div onclick=\"info("+send_id+")\" class=\"info-message-id\"><div><img class=\"info-message-head\" src=\"/static/img/system.png\" alt=\"头像\"/><span class=\"info-message-name\"system>"+username +"已拒绝你的好友请求!</span></div></div><div style=\"padding-top:10px;padding-bottom:10px;\"><span class=\"info-message-time-left\">"+to_date(times)+"</span></div></div>")
+
+                    }
+                    if(type==2&&status==1){
+                          //fyAlert.msg("你已拒绝对方的好友请求!",{icon:1,animateType:1} )              
+                          $(".info-box").append("<div class=\"info-message-sys\" id="+id+" ><div class=\"info-message-title\"><span> 系统消息</span><span ><img onclick=\"clean("+id+")\" class=\"info-message-img\" src=\"/static/img/close_icon.png\"></span></div><div onclick=\"info("+send_id+")\" class=\"info-message-id\"><div><img class=\"info-message-head\" src=\"/static/img/system.png\" alt=\"头像\"/><span class=\"info-message-name\">你已拒绝"+username +"的好友请求!</span></div></div><div style=\"padding-top:10px;padding-bottom:10px;\"><span class=\"info-message-time-left\">"+to_date(times)+"</span></div></div>")
+                          
+                    }
+                });
+               
+            })
+        
+    })
+
+    function affirm(id){
+        //alert("接受");
+        $.post('/index/index/correct',{"id":id,"type":1}).then(function(res){
+            if(res.status==0){
+                var msg = document.getElementById(id);
+                msg.remove();
+                fyAlert.msg("已同意好友请求!",{icon:1,animateType:1} )
+            }
+            if(res.status==1){
+                fyAlert.msg(res.msg,{icon:3,animateType:3} )
+            }
+            if(res.status==2){
+                fyAlert.msg(res.msg,{icon:2,animateType:2} )
+            }
+        });        
+    }
+
+    function cancel(id){
+        //alert("取消");
+        $.post('/index/index/correct',{"id":id,"type":2}).then(function(res){
+            if(res.status==0){
+                var msg = document.getElementById(id);
+                msg.remove();
+                fyAlert.msg("已拒绝好友请求!",{icon:1,animateType:1} )
+            }
+        });
+        
+
+    }
+
+    function info(id){
+        alert("查看用户资料");
+
+    }
+    //清除消息
+    function clean(id){
+        $.post('/index/index/clean',{"id":id,"status":1}).then(function(res){
+            //console.log(res);
+            if(res.status==0){
+                var msg = document.getElementById(id);
+                msg.remove();
+                //fyAlert.msg("操作成功!",{icon:1,animateType:1} )
+            }else{
+                fyAlert.msg("操作失败!",{icon:2,animateType:2} )
+            }
+        });
+    }
+
+    $("#getinfo").click(function(){
+        alert("ggg");
+    });
+    //
+    $('#myset').click(function(){
+        location.href = '/myset'
+        window.localStorage.setItem('user_id',{$umsg.id});
+    })
+</script>
+</body>
+</html>

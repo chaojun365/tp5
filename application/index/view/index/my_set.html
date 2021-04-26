@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="title">我的</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" type="text/css" href="/static/wode/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/fy/css/fy-alert.css">
+    <link rel="stylesheet" href="/static/swiper/swiper6.5.7.css"> 
+    <link href="/static/showloading/css/loading.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" href="/static/jquerySyalert/css/animate.min.css" />
+    <link rel="stylesheet" href="/static/jquerySyalert/syalert/syalert.min.css" />
+    <!-- <link rel="stylesheet" href="/static/showinput/css/inputstyle.css"> -->
+
+    <!--引入CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="/static/webuploader/webuploader.css"> -->
+    <style>
+      
+      *{   
+            margin: 0;   
+            padding: 0;   
+            //background-color: #EAEAEA;   
+      }
+      .div-father{
+             position:relative;
+             top:60px;
+             height: 400px;width:300px;//border: 1px solid #B5A6A6;
+             border-radius: 10px;background: #fff    }
+      .div-son{  
+            position:relative;
+            left:33px;
+            top:30px;
+            height: 234px;
+            width: 234px;
+            border: 2px solid #B5A6A6 }
+    </style>
+</head>
+<body>
+
+<div class="swiper-container" id="swiper-container">
+            
+    <div class="swiper-wrapper">
+       <!--  第一页 -->
+        <div class="swiper-slide stop-swiping" id="sw01">
+            <div class="aui-flexView">
+                <header class="aui-navBar aui-navBar-fixed">
+                    <div class="aui-center">
+                        <span class="aui-center-title">个人中心</span>
+                    </div>
+                </header>
+                <section class="aui-scrollView">
+                    <div class="aui-bg-box"></div>
+                    <div class="aui-user-box">
+                        <div id="picker"></div>
+                        <div class="aui-flex">
+                            <div  class="aui-user-img" onclick="document.querySelector('.webuploader-element-invisible').click()">
+                                <img id="avatar" onclick="return false" style="height: 70px;width: 70px" src="" alt="头像">
+                            </div>
+                            <div class="aui-flex-box">
+                                <h2 id="username">--</h2>
+                                <p id="logintime">--</p>
+                            </div>
+                            <div class="aui-tes">
+                                <button id="myset" >个人信息</button>
+                            </div>
+                        </div>
+                        <div class="aui-palace">
+                            <a href="javascript:;" class="aui-palace-grid">
+                                <h2 id="friendnum">--</h2>
+                                <p>好友</p>
+                            </a>
+                            <a href="javascript:;" class="aui-palace-grid">
+                                <h2 id="blacklist">--</h2>
+                                <p>收藏</p>
+                            </a>
+                            <a href="javascript:;" class="aui-palace-grid">
+                                <h2 id="">--</h2>
+                                <p>黑名单</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="aui-white-bg aui-white-bg-pa">
+                        
+                        
+               
+                    </div>
+                    <div class="aui-list-item">
+                      <div class="swipe-handler">
+                        <a href="javascript:;" class="aui-flex b-line" id="box01">
+                            <!-- <div class="aui-cou-img">
+                                 <img src="static/picture/icon_01.png" alt=""> 
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p>昵称</p>
+                                <p id="name"></p>
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>
+                      </div>
+                        <a href="javascript:;" class="aui-flex b-line" id="box02">
+                            <!-- <div class="aui-cou-img">
+                                <img src="static/picture/icon_02.png" alt="">
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p>签名</p>
+                                <p id="sign"></p>
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>            
+                        <a href="javascript:;" class="aui-flex b-line" id="box03">
+                            <!-- <div class="aui-cou-img">
+                                <img src="static/picture/icon_02.png" alt="">
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p>手机</p>
+                                <p id="phone" style="margin-top: 0.1rem;"></p>
+                                <img style="vertical-align: middle;float:right;height: 20px;width: 20px;" src="/static/img/lock.png">
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>
+                        <a href="javascript:;" class="aui-flex b-line" id="box04">
+                            <!-- <div class="aui-cou-img">
+                                <img src="static/picture/icon_02.png" alt="">
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p>二维码名片</p>
+                                <p id="qrcode"><img style="height: 20px;width: 20px;" src="/static/img/qrcode2.png"></p>
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>
+                        <a href="javascript:;" class="aui-flex b-line" id="box05">
+                            <!-- <div class="aui-cou-img">
+                                <img src="static/picture/icon_03.png" alt="">
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p id="pwd">密码</p>
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>
+                        <a href="javascript:;" class="aui-flex" id="box06">
+                            <!-- <div class="aui-cou-img">
+                                <img src="static/picture/icon_04.png" alt="">
+                            </div> -->
+                            <div class="aui-flex-box">
+                                <p>帮助中心</p>
+                            </div>
+                            <div class="aui-arrow"></div>
+                        </a>
+                    </div>
+               </div>
+        </div>
+
+
+        <!-- 第二页 -->
+        <div class="swiper-slide red-slide" id="sw02">
+            <div class="nick-box">
+                      <header style="background:#F7F7F7;border-bottom: 0.1px solid #e2e2e2;" class="aui-navBar aui-navBar-fixed">
+                            <div style="height: 44px;width:40px;z-index: 999;" id="back">
+                                <img style="height: 16px;width: 10px;margin-top: 13px;margin-left: 10px" src="/static/img/back.png">
+                            </div>
+                            <div style="width: 100%;text-align: center;">
+                                <h4 class="top-title" style="color: #000;margin-top:11px;margin-left:-26px;">个人中心</h4>    
+                            </div>
+                      </header>
+                      <div id="sp01" class="swp">
+                         <input id="myname" type="input" name="myname" value ="我的昵称" >
+                         <font>使用符合规范的名字</font>
+                      </div>
+                      <div id="sp02" class="swp">
+                         <input id="mysign" type="input" name="mysign" value ="个性签名" >
+                         <font>写个有个性点地签名吧</font>
+                      </div>
+                      <div id="sp03">
+                        <div>
+                         <img id="phoneimg" src="/static/img/phone.png" style="height: 122px;width: 93px;margin-top: 30px;margin-bottom: 30px;">
+                          <div id="bindingphone" style="width:240px;text-align: center; ">已绑定的手机号:<span id="bindphone" style="">***********</span></div> 
+                          <div style="text-align: center;left:33px;padding-top: 10px;padding-bottom: 20px;color:#B5B5B5"><small>如需更换手机号可点击下方按钮验证</small></div>                      
+                          <button class="changephone" onClick="syalert.syopen('alert4')" style="margin-top:0px;width: 234px;height: 40px;border: none;border-radius: 8px;background:#10AED5;color: #fff">
+                                更换手机号</button>
+
+                        </div>       
+                      </div>
+                      <!-- 二维码 -->
+                      <div id="sp04" style="display: none;">
+                        <div style="" >
+                            <div class="div-father" style="">
+                                <div style="text-align: center;left:33px;padding-top: 30px;">扫描二维码或复制链接加好友</div>
+                                <div class="div-son" id="qrcodejq" >
+
+                                </div>
+                                <button class="copy" style="margin-left:33px;margin-top:50px;width: 234px;height: 40px;border: none;border-radius: 8px;background:#10AED5;color: #fff"data-clipboard-text="">
+                                复制链接</button>
+                                
+                            </div>
+                        </div>    
+                      </div>
+                      <!-- 密码 -->
+                      <div id="sp05" class="swp" style="display: none;">
+                           <font style="text-align: left;">输入正确的原密码和符合规范的新密码(密码长度6~16位,可以是数字加字母),如需找回原密码请回登录页点击找回密码</font>
+                           <input  id="oldpwd" type="password" name="oldpwd" placeholder="原密码" >
+                           <input  id="newpwd1" type="password" name="newpwd" placeholder="新密码" >
+                           <input  id="newpwd2" type="password" name="newpwd" placeholder="再次输入" >
+                           <button class="changepwd"  style="margin-top:30px;width: 234px;height: 40px;border: none;border-radius: 8px;background:#10AED5;color: #fff"> 确定</button>
+                        
+                      </div>
+                      <div id="sp06">帮助</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <div class="swiper-container" id="swiper-container2">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide blue-slide">
+            slider1</div>
+        <div class="swiper-slide red-slide">
+            slider2</div>
+    </div>
+</div> -->
+
+<!-- 自定义弹窗 -->
+<div class="sy-alert sy-alert-model animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="confirm" sy-mask="true" id="alert4">
+  <div class="sy-title">更换手机号</div>
+  <div class="sy-content">
+    <div class="form">
+    <p class="input-item"><input id="newphone" type="text" placeholder="请输入新手机号" /></p>
+    <p class="input-item"><input id="code" type="text" placeholder="请输入验证码" /><button class="getcode">获取验证码</button></p>
+    </div>
+  </div> 
+  <div class="sy-btn">
+    <button onClick="syalert.syhide('alert4')" >取消</button>
+    <button id="checkcode" >确定</button>
+  </div> 
+</div>
+
+   <!--引入JS-->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/jquery-qrcode-master/jquery.qrcode.min.js"></script>
+<script src="/static/jquerySyalert/syalert/syalert.min.js"></script>
+<script src="/static/swiper/swiper6.5.7.js"> </script> 
+<script src="/static/js/clipboard.min.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+<script src="/static/showloading/js/loading.js"></script>
+<!-- <script type="text/javascript" src="/static/showinput/js/popups.js"></script> -->
+<script type="text/javascript" src="/static/webuploader/webuploader.js"></script>
+<script>
+    var uploader = WebUploader.create({
+    // 选完文件后，是否自动上传。
+    auto: true,
+
+    // swf文件路径
+    swf: '/static/webuploader/Uploader.swf',
+
+    // 文件接收服务端。
+    server: '{:url("index/index/upimg")}',
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#picker',
+
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    //设置文件上传域
+    fileVal: 'pic',
+    //只允许上传图片格式
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+    }
+    
+    }); 
+    //回调事件
+    uploader.on( 'uploadSuccess', function($file,response) {
+       //console.log(arguments);
+       if(response.status==0){
+        $('#avatar').attr('src',response.img).show('slow');
+        fyAlert.msg("更新成功!",{icon:1,animateType:1} )
+       }else{
+        fyAlert.msg("更新失败!",{icon:1,animateType:1} )
+       }
+    }); 
+</script>
+<script>
+    $(document).ready(function () {
+        //$(".nick-box").toggle();
+        //$("#sw01").toggle();
+       var user_id = (window.localStorage.getItem('user_id'))
+       if (user_id) {
+         $.post('/index/index/seach',{"id":user_id}).then(function(res){
+               if (res) {
+                  //console.log(res);
+                  $('#avatar').attr('src',res.head_img);
+                  $('#username').text(res.username);   
+                  $('#name').text(res.username);
+                  $('#sign').text(res.sign);
+                  $('#myname').val(res.username);
+                  $('#mysign').val(res.sign);
+                  $('#phone').text(res.phone);
+                  $('#bindphone').text(res.phone);
+                  $('#logintime').text(to_date(res.last_login_time));
+               }
+
+         })
+       }
+      
+    }); 
+    //将时间戳转为日期
+    function to_date(phpstr) {
+            str = parseInt(phpstr) * 1000;//将php时间戳转化为整形并乘以1000
+            var newDate = new Date(str);
+            var year = newDate.getUTCFullYear();//取年份
+            var month = newDate.getUTCMonth() + 1;//取月份
+            var nowday = newDate.getUTCDate();//取天数
+            var hours = newDate.getHours();//取小时
+            var minutes = newDate.getMinutes();//取分钟
+            var seconds = newDate.getSeconds();//取秒
+            return year + "/" + month + "/" + nowday + " " + getzf(hours) + ":" + getzf(minutes) + ":" + getzf(seconds);//拼接 2017-2-21 12:23:43    
+    } 
+
+          //补0操作
+  function getzf(num){  
+            if(parseInt(num) < 10){  
+                num = '0'+num;  
+            }  
+            return num;  
+  }
+     
+</script>
+
+<script language="javascript"> 
+var mySwiper = new Swiper('#swiper-container',{
+   noSwiping : true,
+   noSwipingClass : 'stop-swiping',
+   on: {
+    slideChangeTransitionStart: function(){
+      //alert(this.activeIndex);
+      //当滑动到第一页时改变title
+      if (this.activeIndex==0) {
+        $('#title').text("我的");
+      }
+    },
+  },
+
+})
+  $('#back').click(function(){
+    mySwiper.slidePrev();
+  })
+  $('#box01').click(function(){
+    mySwiper.slideNext();
+    $('#title').text("更改昵称");
+    $('.top-title').text("更改昵称");
+    $('#sp01').show();
+    $('#sp02',).hide();
+    $('#sp03').hide();
+    $('#sp04').hide();
+    $('#sp05').hide();
+    $('#sp06').hide();
+  })
+
+  $('#box02').click(function(){
+    $('#title').text("签名");
+    $('.top-title').text("签名");
+    mySwiper.slideNext();
+    $('#sp01').hide();
+    $('#sp02').show();
+    $('#sp03').hide();
+    $('#sp04').hide();
+    $('#sp05').hide();
+    $('#sp06').hide();
+  }) 
+    $('#box03').click(function(){
+    $('#title').text("手机号码"); 
+    $('.top-title').text("手机号码");   
+    mySwiper.slideNext();
+    $('#sp01').hide();
+    $('#sp02').hide();
+    $('#sp03').show();
+    $('#sp04').hide();
+    $('#sp05').hide();
+    $('#sp06').hide();
+  }) 
+    $('#box04').click(function(){
+    $('#title').text("二维码名片");
+    $('.top-title').text("二维码名片");    
+    mySwiper.slideNext();
+    $('#sp01').hide();
+    $('#sp02').hide();
+    $('#sp03').hide();
+    $('#sp04').show();
+    $('#sp05').hide();
+    $('#sp06').hide();
+
+  }) 
+    $('#box05').click(function(){
+    $('#title').text("设置密码");
+    $('.top-title').text("设置密码");
+    mySwiper.slideNext();
+    $('#sp01').hide();
+    $('#sp02').hide();
+    $('#sp03').hide();
+    $('#sp04').hide();
+    $('#sp05').show();
+    $('#sp06').hide();
+  }) 
+    $('#box06').click(function(){
+    $('#title').text("帮助");
+    $('.top-title').text("帮助");
+    mySwiper.slideNext();
+    $('#sp01').hide();
+    $('#sp02').hide();
+    $('#sp03').hide();
+    $('#sp04').hide();
+    $('#sp05').hide();
+    $('#sp06').show();
+  }) 
+    //生成二维码
+      var ret;
+    $.post('/index/index/qrcode',{"status":1}).then(function(res){
+              ret = res;
+          var img = $('#avatar').attr('src'); 
+          var src = ('<img src="'+img+'">');
+          var  w  = $(window).width();  
+          //var pw  = $('#phoneimg').width();   
+          var fw  = $('.div-father').width(); 
+          //var pw  = $('.sendcode').width();  
+          $('.div-father').css("left",(w-fw)/2);
+          $('.changephone').css("margin-left",(w-234)/2);
+          $('#phoneimg').css("margin-left",(w-93)/2);
+          $('#bindingphone').css("margin-left",(w-240)/2);
+          $("#qrcodejq").qrcode({
+
+             render: "canvas", //还有table方式
+             width: 230, //宽度
+             height:230, //高度
+             //中间logo start
+                mode: 4,
+                mSize: 11 * 0.01,
+                mPosX: 50 * 0.01,
+                mPosY: 50 * 0.01,
+                image: src,
+             //中间logo end
+             text: res, //任意内容
+         });
+         //画logo
+         //$("#qrcodeDiv canvas")[0].getContext('2d').drawImage($("#logoImg")[0], x, y, lx, ly); 
+    })
+    
+    //复制用户链接
+    $(".copy").click(function () {
+         $(".copy").attr("data-clipboard-text",ret);
+        var clipboard = new ClipboardJS('.copy');
+        clipboard.on('success', function(e) {
+            fyAlert.msg("复制成功!",{icon:1,animateType:1} )
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+            fyAlert.msg("复制失败！",{icon:3,animateType:3} )
+        });
+    });
+    var clipboard = new ClipboardJS('.copy', {
+        text: function () {
+            return window.url;
+        }
+    });
+   
+    clipboard.on('success', function (e) {
+        //console.log(e);
+    });
+
+    clipboard.on('error', function (e) {
+       // console.log(e);
+    });
+    //修改手机号 获取验证码
+    $('.getcode').click(function(){
+        let phone = $('#newphone').val();
+        //console.log(phone);
+        //显示遮罩
+        loading.showLoading({
+                        type:3,
+                        tip:"获取验证码"
+                    })
+        $.post('/index/index/getcode',{"phone":phone}).then(function(res){
+                //隐藏遮罩
+                loading.hideLoading();
+                if (res.status==0) {
+                    fyAlert.msg(res.msg,{icon:1,animateType:1} )
+                }else{
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                }
+        })
+    })
+    //校验验证码
+    $('#checkcode').click(function () {
+                    let phone = $('#newphone').val();
+                    let code = $('#code').val();
+                    //console.log(code);
+                    //显示遮罩
+                    loading.showLoading({
+                        type:3,
+                        tip:"验证中"
+                    })
+                    $.post('/index/index/checkcode',{"code":code,"phone":phone}).then(function(res){
+                        //隐藏遮罩
+                        loading.hideLoading();
+                        //
+                        
+                        if (res.status==0) {
+                            //关闭弹窗
+                            syalert.syhide('alert4');
+                            //修改标签手机号
+                            $('#bindphone').text(phone);
+                            $('#phone').text(phone);
+                            fyAlert.msg(res.msg,{icon:1,animateType:1} )
+                        }else if(res.status==1){
+                            fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                        }else{
+                            fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                        }
+                    })              
+          
+    })
+    //修改信息函数
+    function modify_data($type,$text){
+        $.post('/index/index/modify_data',{"type":$type,"text":$text}).then(function(res){
+             
+             if (res.status== 0) {
+                 fyAlert.msg(res.msg,{icon:1,animateType:1} )//成功
+                 $("#name").text($("#myname").val());
+                 $("#username").text($("#myname").val());
+                 $("#sign").text($("#mysign").val()); 
+             }else{
+                 fyAlert.msg(res.msg,{icon:3,animateType:3} )//失败
+             }
+        })
+    }
+    //修改昵称
+    $("#myname").blur(function(){
+        let text = $("#myname").val();
+        modify_data('username',text);
+    });
+    //修改签名
+    $("#mysign").blur(function(){
+        let text = $("#mysign").val();
+        modify_data('sign',text);
+    }); 
+    
+    //修改密码
+    $(".changepwd").click(function(){
+        var oldpwd =$('#oldpwd').val();
+        var newpwd1 =$('#newpwd1').val();
+        var newpwd2 =$('#newpwd2').val();
+        console.log(oldpwd,newpwd1,newpwd2);
+        if (newpwd1===newpwd2) {
+                //显示遮罩
+                 loading.showLoading({
+                     type:3,
+                     tip:"验证中"
+                 })            
+            $.post('/index/index/changepwd',{'pwd':oldpwd,'newpwd':newpwd1}).then(function(res){
+                //隐藏遮罩
+                loading.hideLoading();
+                if (res.status==0) {
+                    fyAlert.msg(res.msg,{icon:1,animateType:1} )//成功
+                }else{
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )//失败
+                }
+            });
+        }else{
+            fyAlert.msg("两次密码不一致!",{icon:2,animateType:2} )
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>注册</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="/static/fy/css/fy-alert.css">
+  <style>
+    
+    .msgColor{
+	color:#FF552E
+    }
+    .msgerr{
+	  width: 15rem;line-height: 14px;text-align:left;margin-bottom:0.5rem;margin-top:0.5rem;
+    }
+    .msgico{
+    margin-right: 5px;width: 15px;height: 15px;display:inline-block;vertical-align:middle;
+    }
+    input{
+      outline: none;
+    }
+	 .input{
+	  width: 15rem;height:2.0rem;border:2.5px solid #EBEBEB;
+	  }
+	 .pwdinput{
+    border:none;width: 10rem;height:1.8rem;margin-left:1px;
+    }
+	 .codesend{
+    border-radius: 3px;
+    position: absolute;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 5px;
+    padding-left: 6px;	
+	  margin:2px;
+    background: #EEEEEE;
+    color: #ff552e;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+	}
+	button{
+    
+    }
+	.protocol{
+	 color:#ABABAB;
+	 font-size:0.65rem;
+	 text-align: center;
+	 margin-top:.5rem;
+	 margin-bottom:.5rem;
+	}
+	a{
+	color:#FF552E;
+	}
+	.input0{
+	border:none;width: 14.8rem;height:1.8rem;
+	}
+    input::-webkit-input-placeholder{
+            color:#ABABAB;
+    }
+    input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#ABABAB;
+    }
+    input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#ABABAB;
+    }
+    input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#ABABAB;
+    }
+	
+	.btnopen{
+	width: 15rem;height:2.55rem;border:none;margin-top:1rem;margin-bottom:2.5rem;color:#fff;
+	background-color:#FF552E;
+	}
+    
+	.btnclose{
+	width: 15rem;height:2.55rem;border:none;margin-top:1rem;margin-bottom:2.5rem;color:#fff;
+	background-color:#D4B8B5;
+	}
+  </style>
+</head>
+<body class="">
+<body bgcolor="#1495E7">
+<!-- 首页图片开始-->
+<div class="flool loginsignup2" style="text-align: center;" >
+<h2>
+  <p style="color:#FFF">Talk Chat注册</p>
+</h2>
+  <!-- <img style="height:8rem" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3726603867,3396193219&fm=26&gp=0.jpg" alt="ERP Sevrer登入" /> -->
+</div>
+<!-- 首页图片结束-->
+<!--注册开始-->
+<div style="margin:1rem; border:0.1px solid #fff;background:#fff;border-radius:0.8rem">
+
+<h1 align=center style="color:#1495E7" >欢迎注册<p style="color:#ABABAB;margin-top:0.2rem;font-weight: normal;font-size:0.8rem">已有账号？<a href="login">登入</a></p></h1>
+<!-- 账号 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" align=left >
+      <input class="pwdinput" type="text" id="phone"  placeholder='手机:' />
+	  <span id="getcode" class="codesend">获取动态码</span>
+    </div>
+    <div  id="err0" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <span></span><label class="msgColor" id="msg0" >请输入手机号！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+<!-- 动态码 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" >
+      <input class="input0" type="text" id="code"  placeholder='动态码:' />
+    </div>
+    <div id="err01" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <label class="msgColor" id="msg01" >请输入动态码！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+
+<!-- 账号 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" >
+      <input class="input0" type="text" id="username" maxlength="20" placeholder='账户名:' />
+    </div>
+    <div id="err02" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <label class="msgColor" id="msg02" >请输入账户名！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+
+<!-- 密码 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" >
+      <input class="input0" type="password" id="pwd01"  placeholder='密码:' />
+    </div>
+    <div id="err03" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <label class="msgColor" id="msg03" >请输入密码！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+
+<!-- 再次密码 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" >
+      <input class="input0" type="password" id="pwd02"  placeholder='再次确认:' />
+    </div>
+    <div id="err04" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <label class="msgColor" id="msg04" >请再次输入密码！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+<!-- end -->
+<div class="protocol">注册即同意<a target="_blank" class="baseColorFt" href="//helps.58.com/rules/detail?siteId=5502&amp;terminal=PC&amp;contentId=301217&amp;sourceType=58pc-nr-gzxy&amp;spReturn=1">《58同城使用协议》</a>&amp;<a target="_blank" class="baseColorFt" href="//helps.58.com/rules/detail?siteId=5502&amp;terminal=PC&amp;contentId=301218&amp;sourceType=58pc-nr-gzxy&amp;spReturn=1">《隐私政策》</a></div>
+
+ <div class="btnclass" align=center> 
+   <button class="btnopen" id="btn">确定</button>
+ </div>
+</div>  
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+
+<script type="text/javascript">
+//验证手机号码格式       
+     $("#phone").blur(function(){
+           var phone = $("#phone").val();
+           //var textvalue = TalkWords.value;
+           //console.log(phone);
+	         var strtext   = phone.replace(/(^\s*)|(\s*$)/g, '');
+	   //console.log(strtext);
+           var reg1 = /\d{1,}/;
+           var reg2 = /^1[3456789]\d{9}$/;
+
+           if(!reg1.test(strtext)){
+               $("#err0").css("visibility", "visible");
+	             $("#msg0").text('请输入手机号!') ;
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+           return false;
+           } else if (!reg2.test(strtext)){
+               $("#err0").css("visibility", "visible");
+	             $("#msg0").text('号码格式不正确!');
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+           return false;
+           }
+          $.post("index/register/checkphone",{"phone":phone}).then(function(res){
+              //console.log(res);
+              if(res){
+                  if (res.status==1){
+                        $("#err0").css("visibility", "visible");
+                        $("#msg0").text('已被注册!');
+                        $("#btn").attr("class","btnclose")
+                        $("#btn").attr('disabled',true);                 
+                  }else{
+                        $("#err0").css("visibility", "visible");
+                        $("#msg0").text('号码可用!');
+                        $("#btn").attr("class","btnopen")
+                        $("#btn").attr('disabled',false); 
+                  }
+              }else{
+                   fyAlert.msg(res.msg,{icon:1,animateType:1} )
+                        $("#btn").attr("class","btnclose")
+                        $("#btn").attr('disabled',true);
+            }  
+          })
+    });
+    $("#code").blur(function(){
+       var code = $("#code").val();
+       var strtext   = code.replace(/[^\d]/g,'');
+       var reg = /\d{1,}/;
+       //console.log(strtext);
+       if(!reg.test(strtext)){
+               $("#err01").css("visibility", "visible");
+               $("#msg01").text('请输入验证码!') ;
+               $("#btn").attr("class","btnclose") 
+               $("#btn").attr('disabled',true);
+           return false;
+       }else{
+               $("#err01").css("visibility", "hidden");
+               $("#btn").attr("class","btnopen") 
+               $("#btn").attr('disabled',false);         
+       }
+    });
+    $("#username").blur(function(){
+       var username = $("#username").val();
+       var strtext   = username.replace(/[^\d]/g,'');//replace("^[A-Za-z0-9\u4e00-\u9fa5]+$");
+       var reg1 = ("^[A-Za-z0-9\u4e00-\u9fa5]+$");//
+       if(!reg1.test(strtext)){
+               $("#err02").css("visibility", "visible");
+               $("#msg02").text('请输入用户名!') ;
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true); 
+           return false;
+       }else{
+               $("#err02").css("visibility", "hidden");
+               $("#btn").attr("class","btnopen")
+               $("#btn").attr('disabled',false);
+       }
+    });
+    $("#pwd01").blur(function(){
+       var pwd01 = $("#pwd01").val();
+       var strtext   = pwd01.replace(/(^\s*)|(\s*$)/g,"");
+       var reg1 = /^[a-zA-Z0-9_]{6,15}$/;///\d{1,}/;
+       //console.log(strtext.length);
+       if(strtext.length==0){
+               $("#err03").css("visibility", "visible");
+               $("#msg03").text('请输入密码!') ;
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+           return false;
+       }else{
+                $("#err03").css("visibility", "hidden");
+                $("#btn").attr("class","btnopen")
+                $("#btn").attr('disabled',false);
+       } 
+       if(!reg1.test(strtext)){
+               $("#err03").css("visibility", "visible");
+               $("#msg03").text('密码只能是6~15位的字母和数字!') ;
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+           return false;
+       }else{
+               $("#err03").css("visibility", "hidden");
+               $("#btn").attr("class","btnopen")
+               $("#btn").attr('disabled',false);
+       } 
+    });
+    $("#pwd02").blur(function(){
+       var pwd01 = $("#pwd01").val();
+       var pwd02 = $("#pwd02").val();
+       if(pwd01!=pwd02){
+               $("#err04").css("visibility", "visible");
+               $("#msg04").text('密码不一致!') ;
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+       }else{
+               $("#err04").css("visibility", "hidden");
+               $("#btn").attr("class","btnopen")
+               $("#btn").attr('disabled',false);
+       }
+    });
+    $("#btn").click(function () {
+       var pwd01 = $("#pwd01").val();
+       var pwd02 = $("#pwd02").val();
+       var phone = $("#phone").val();
+       var code  = $("#code").val();
+       var username = $("#username").val();
+       if(phone.length==0||code.length==0||username.length==0||pwd01!=pwd02){
+               $("#btn").attr("class","btnclose")
+               $("#btn").attr('disabled',true);
+               return false;
+       }else{
+          console.log(phone,code,username,pwd01,pwd02);
+          $.post("index/register/register",
+            {"phone":phone,
+            "username":username,
+            "code":code,
+            "password":pwd01,
+            "head_img":"/static/img/loading.jpg"}).then(function(res){
+             if (res.code==0) {
+                fyAlert.msg(res.msg,{icon:3,animateType:3} )
+             }else if (res.status==0) {
+                fyAlert.msg(res.msg,{icon:1,animateType:1} )
+                 window.setTimeout(function(){
+                    //sessionStorage.removeItem('user_info');
+                    //将localStorage传递到哪个页面
+                    location.href = '/login'
+                    //设置localStorage
+                    window.localStorage.setItem('phone',phone);
+                 },1500);
+                
+             }else if (res.status==1) {
+                fyAlert.msg(res.msg,{icon:3,animateType:3} )
+             }
+          })
+       }
+    });
+
+</script>
+</body>
+</html>

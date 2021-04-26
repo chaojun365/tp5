@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>登入</title>
+
+<link rel="stylesheet" href="static/css/normalize.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" type="text/css" href="static/fy/css/fy-alert.css">
+<link rel="stylesheet" type="text/css" href="static/fy/css/demo.css">
+
+</head>
+<body>
+
+<div class="container">
+  <div class="left"style="background: ">
+    <div class="header">
+      <h2 class="animation a1">
+        <!--  {if(session('?error'))}
+         <span style="color:red">{:session('error')}</span>
+         {else/}
+         欢迎登入
+         {/if} -->
+         欢迎登入
+      </h2>
+      <h4 class="animation a2">使用手机和密码登录</h4>
+    </div>
+   
+    <div class="form">
+      <input type="text" class="form-field animation a3" name="text" id="phone" placeholder="手机">
+      <input type="password" class="form-field animation a4" name="password" id="password" placeholder="密码">
+      <p class="animation a5" style="text-align: left;"><a href="/register">注册账号</a><span class="span" style="float: right;"><a href="#1">忘记密码</a></span> </p>
+        
+      <!-- <input class="animation a6"  type="submit" name="" value="登录"> -->
+      <button class="animation a6" id="sub" >登录</button>
+    </div>
+
+  </div>
+  <div class="right"></div>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+<script>
+  //将注册成功的手机号自动填入输入框
+   $(document).ready(function () {
+       var phone = (window.localStorage.getItem('phone'))
+       if (phone) {
+        $("#phone").val(phone);
+       }
+   }); 
+   
+
+ $(function(){
+      $('#sub').click(function(){
+           var phone= $("#phone").val();
+           
+
+      if(/^1[3456789]\d{9}$/.test(phone)){
+          
+    
+          $.post('index/login/login',{"phone":$('#phone').val(),"password":$('#password').val()}).then(function(res){
+             console.log(res);
+            if(res.status == 0){
+                 //登入成功
+                 document.location.href='/';
+                 fyAlert.msg(res.msg,{icon:5,animateType:5} )
+            }
+            if(res.status == 1){
+                 //账号或者密码错误
+                 fyAlert.msg(res.msg,{icon:3,animateType:3} )
+            }
+            if(res.status == 2){
+                 //账户封禁
+                 fyAlert.msg(res.msg,{icon:3,animateType:3} )
+            }
+          })
+         
+         }else{
+           // alert("手机号码格式不正确!");
+                fyAlert.msg("手机号码格式不正确!",{icon:3,animateType:3} )
+                return false;
+           //$("#sub").prop("disabled",true);
+         }
+
+        });
+  });
+</script>
+  
+</body>
+</html>

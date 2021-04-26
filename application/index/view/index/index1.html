@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>登入</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="/public/static/css/fy-alert.css">
+  <link rel="stylesheet" type="text/css" href="/public/static/css/demo.css">
+<style>
+
+.lsu{
+	border:2px solid #EBEBEB;margin-bottom:0.8rem;margin-top:0.8rem;
+	}
+.input{
+	width: 15rem;height:2.0rem;border:2.5px solid #EBEBEB
+	}
+.input0{
+	border:none;width: 14.8rem;height:1.8rem;
+	}
+.input01{
+	border:none;width: 14.8rem;height:1.8rem;margin-left:1px;
+	}
+.pwdinput{
+    border:none;width: 13rem;height:1.8rem;margin-left:1px;
+}
+.qcode1{
+   padding:0.6rem;border-radius:1.2rem;width:13rem;color:#000;background-color:#fff;border:1.5px solid;border-color:#1495E7;margin-bottom:0.5rem;margin-top:0.5rem;
+}
+.qcode2{
+    padding:0.6rem;border-radius:1.2rem;width:13rem;color:#fff;background-color:#1495E7;border:1.5px solid;border-color:#1495E7;margin-bottom:0.5rem;margin-top:0.5rem;
+}
+.msgColor{
+	color:#FF552E
+}
+.msgerr{
+	width: 15rem;line-height: 14px;text-align:left;margin-bottom:0.5rem;margin-top:0.5rem;
+}
+.msgico{
+    margin-right: 5px;width: 15px;height: 15px;display:inline-block;vertical-align:middle;
+}
+.pwdico{
+
+}
+    
+a{
+	  color:#FF552E;
+	}
+.eye{
+    height:12px;
+	  
+	  vertical-align:middle;
+}
+</style>
+</head>
+<body class="">
+<body bgcolor="#1495E7">
+<!-- 首页图片开始-->
+<div class="flool loginsignup2" style="text-align: center;" >
+<h2>
+  <p style="color:#FFF">Talk Chat</p>
+</h1>
+  <!-- <img style="height:8rem" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3726603867,3396193219&fm=26&gp=0.jpg" alt="ERP Sevrer登入" /> -->
+</div>
+<!-- 首页图片结束-->
+<!--登录表单开始-->
+<div class="loginsingup-input"  style="margin-left:1rem;margin-right:1rem; border:0.1px solid #fff;background:#fff;border-radius:0.8rem">
+<h1 align=center style="color:#1495E7" >欢迎登入<p style="color:#ABABAB;margin-top:0.2rem;font-weight: normal;font-size:0.8rem">遇到问题？<a href="/">帮助中心</a></p></h1>
+
+
+<form id="loginform" method="post" style="text-align: center;" >
+  
+<!-- 账号 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" >
+      <input class="input0" type="text" id="username"  placeholder='手机:' />
+    </div>
+    <div id="err01" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <span><img class="msgico" align=center  src="\public\static\index\assets\images\err.png"/></span><label class="msgColor" >请输入账号！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+<!-- 密码 -->
+<div class="allinput" align=center >
+ <div class="allinput01">
+    <div class="input" align=left >
+      <input class="pwdinput" type="password" id="pwd"  placeholder='密码:' />
+	  <span class="pwdico" onclick="eyehide()">
+	  <img class="eye" id="eyeico"  src="\public\static\index\assets\images\ere_off.png"/></span>
+    </div>
+    <div  id="err02" align=center style="visibility: hidden" >
+      <div class="msgerr" >
+        <span><img class="msgico" align=center  src="\public\static\index\assets\images\err.png"/></span><label class="msgColor" >请输入密码！</label>
+      </div>
+    </div> 
+ </div>
+</div>
+      
+<!-- <hr/> -->
+	   <div class="submit" >
+	  
+      <input onclick="queding()" type="button" class="qcode2" id="qnlogin" value="登入" />
+         	  
+    </div>
+    <div class="submit" style="margin-bottom:2rem" >
+      <a href="register">
+      <input type="button" class="qcode1" id="zhuce" value="注册" />  
+      </a>
+    </div>
+   
+  </form>
+</div>
+<!--登录表单结束-->
+<script src="/public/static/js/jquery.min.js"></script>
+<script src="/public/static/js/fy-alert.js"></script>
+<script src="/public/static/index/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="/public/static/index/assets/js/jquery-weui.min.js"></script>
+<script src="/public/static/index/assets/js/lib/fastclick.js"></script>
+<script src="/public/static/index/assets/js/layer.js"></script>
+<script src="/public/static/index/assets/js/ajaxplugin.js"></script> 
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script type="text/javascript">
+
+function queding()
+{
+  var username =document.getElementById("username").value;
+  var pwd =document.getElementById("pwd").value;
+  
+  if (username==""){
+     document.getElementById("err01").style.visibility='visible';
+	 return false;
+  }else{
+     document.getElementById("err01").style.visibility='hidden';
+  }
+  if (pwd==""){
+     document.getElementById("err02").style.visibility='visible';
+	 return false;
+  }else{
+     document.getElementById("err02").style.visibility='hidden';
+  }
+  
+                var phone = username;
+                 console.log(phone);
+                var password  = pwd;
+                var xhr =new XMLHttpRequest();
+            xhr.onreadystatechange= function(){
+		      if (xhr.readyState==4&&xhr.status == 200){
+				   var result =xhr.responseText;
+				
+			       console.log(result);
+				
+                   if(result == 0){
+				     
+		             fyAlert.msg("账户或密码不正确!",{icon:3,animateType:3} )
+		    
+		           }else if(result == 1){
+		             //alert("登入成功!");
+					 document.location.href='/';
+					 fyAlert.msg("登入成功！",{icon:5,animateType:5} )
+		    
+		           }else if(result == 2){
+			        //alert("账户已被禁用!");
+					fyAlert.msg("账户已被禁用!",{icon:2,animateType:2} )
+			   }				
+					  
+		}
+		  
+		  
+		  
+		};		
+		xhr.open('post','/index/login/logincheck?');
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+	    xhr.send('phone='+phone+'&password='+password);
+}
+function eyehide(){
+  var pwdtype = document.getElementById("pwd"); 
+  var eyetype = document.getElementById("eyeico");
+  if(pwdtype.type=="password"){
+    pwdtype.type ="text"; 
+    eyetype.src = "/public/static/index/assets/images/ere_no.png";	
+  }else{
+    pwdtype.type ="password"; 
+    eyetype.src = "/public/static/index/assets/images/ere_off.png";	
+  }
+   //conlse.log(pwdtype);
+}   
+</script>
+</body>
+</html>

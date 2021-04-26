@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>添加好友</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/fy/css/fy-alert.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/checkbox/css/style.css"> -->
+    <style>
+    	.input
+    	{ 
+    		border: none; outline: none; box-shadow: none; background: #EDEDED;border-radius: 8px;height: 50px;width: 100% 
+    	}
+    	.text
+    	{
+    		margin-bottom: 20px;
+    	}
+    	.div
+    	{
+    		background: #EDEDED;border-radius: 8px;height: auto
+    	}
+    	.div01
+    	{
+    		padding: 10px;
+    	}
+    	.submit
+    	{
+            height: 40px;width: 100%;background:#01AEE0;color: #fff;border-radius: 8px;border:none;outline: none;
+    	}
+    </style>
+</head>
+<body>
+
+  <a href="JavaScript:history.back(-1)"><img src="/static/seach/img/back.png" style="position: absolute;left: 1rem;height: 25px" /></a>
+	<h3 style="text-align: center;vertical-align:middle;">申请添加好友</h3>
+  <div style="margin: 20px;">
+	<div class="text">
+		<small>发送添加好友申请</small>
+		<div>
+	    <input class="input" id="message"></input>
+	    </div>
+    </div>
+
+    <div class="text">
+		<small>设置备注</small>
+		<div>
+	      <input class="input" id="nickname"></input>
+	    </div>
+    </div>
+
+    <div class="text">
+	<small>设置好友权限</small><br/>
+	    <div class="div">
+           <div class="div01" style="border-bottom:1px solid #D2CCCC;">
+            聊天和朋友圈动态
+            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+           </div>
+           <div class="div01">
+            仅聊天
+            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+           </div>
+        </div>
+    </div>
+
+    <div class="text">
+	<small>朋友圈和状态</small><br/>
+	    <div class="div">
+           <div class="div01" style="border-bottom:1px solid #D2CCCC;">
+            不让他看我
+            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+           </div>
+           <div class="div01">
+           	不看他
+           	<img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+           </div>
+        </div>
+    </div>
+
+    <div>
+    	<input class="submit" type="submit" name="" value="发送请求">
+    </div>
+
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+<script>
+$(".submit").click(function () {
+  id = (window.localStorage.getItem('user_id'))
+	var friendid = id;//$("#fid").text();
+	var message = $("#message").val();
+	var nickname = $("#nickname").val();
+    //console.log(message,nickname);
+	$.post("/index/index/friendrequest",{
+		        "friendid":friendid,
+				    "message":message,
+				    "nickname":nickname
+			}).then(function(res){
+             console.log(res);
+               if(res.status==0){
+                    fyAlert.msg(res.msg,{icon:1,animateType:1} )
+                    //location.href = '/'
+               }
+               if(res.status==1||res.status==2){
+                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+                                    
+               }
+
+
+            })
+		
+})
+</script>
+</body>
+</html>

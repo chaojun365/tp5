@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>秒杀</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+	<link href="/static/showloading/css/loading.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" href="/static/jquerySyalert/syalert/syalert.min.css" />
+</head>
+<body style="height: auto">
+  <div style="height: 300px;width: 300px;">
+    <img style="height: 300px;width: 300px;" src="/static/img/miaosha.png">
+    <button id="qianggou" style="height: 40px;width: 180px;float:left;margin-left:70px;margin-top:10px;border-radius: 8px;border: none;color:red">等待开始</button>
+  </div>
+<!-- 消息弹窗 -->
+<div class="sy-alert sy-alert-alert animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="alert" sy-mask="true" id="alert2">
+  <div class="sy-title">温馨提示</div>
+  <div id="over" class="sy-content">抢购结束！</div>
+  <div class="sy-btn">
+    <button id="yes" onClick="syalert.syhide('alert2')">确定</button>
+  </div>
+</div>
+<!-- 提示弹窗 -->
+<div class="sy-alert sy-alert-tips animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="tips" sy-mask="false" id="alert3"> 
+  <div class="sy-content">恭喜您抢到啦！</div>
+</div>
+<!-- 自定义弹窗 -->
+<div class="sy-alert sy-alert-model animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="confirm" sy-mask="true" id="alert4">
+  <div class="sy-title">填写收获信息</div>
+  <div class="sy-content">
+    <div class="form">
+    <p class="input-item"><input type="text" placeholder="请输入手机号" /></p>
+    <p class="input-item"><input type="text" placeholder="请输入验证码" /><button class="getcode">获取验证码</button></p>
+    <p class="input-item"><input type="text" placeholder="请输入地址" /></p>
+    </div>
+  </div> 
+  <div class="sy-btn">
+    <button onClick="syalert.syhide('alert4')">取消</button>
+    <button onClick="ok('alert4')">确定</button>
+  </div> 
+</div>
+
+<script src="/static/seach/js/jquery.min.js"></script>
+<script src="/static/jquerySyalert/syalert/syalert.min.js"></script>
+<script src="/static/showloading/js/loading.js"></script>
+<script>
+
+    var starttime = new Date(1619272000*1000);
+
+    var timer = setInterval(function () {      
+    var nowtime = new Date();
+    var time = starttime - nowtime;
+    var day = parseInt(time / 1000 / 60 / 60 / 24);
+    var hour = parseInt(time / 1000 / 60 / 60 % 24);
+    var minute = parseInt(time / 1000 / 60 % 60);
+    var seconds = parseInt(time / 1000 % 60);
+
+    $('#qianggou').html(day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
+  }, 1000);
+
+    if (starttime <= new Date()) {
+
+        $('#qianggou').text("立即抢购");
+        clearInterval(timer);
+       
+     }
+
+  	$('#qianggou').click(function(){
+       if (starttime > new Date()) {
+           $('#over').text("抢购还未开始");
+           syalert.syopen('alert2');
+       }
+
+    if(starttime <= new Date()){
+
+                //显示遮罩
+        loading.showLoading({
+                        type:3,
+                        tip:"正在抢购"
+                          })
+          $.post('/index/index/miaoshav',{'goods':"iphone"}).then(function(res){
+            //隐藏遮罩
+                  loading.hideLoading();
+            if (res.status==0) {
+               /*syalert.syopen('alert3');*/
+                       syalert.syopen('alert4');
+                       /*fyAlert.msg(res.msg,{icon:1,animateType:1} )*/
+            }else{
+               $('#over').text(res.msg);
+               syalert.syopen('alert2');
+               $('#qianggou').css('color','red');
+            }
+          })
+     }
+	})
+</script>
+</body>
+</html>

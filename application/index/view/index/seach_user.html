@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title id="title">查找用户</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" type="text/css" href="/static/chat/css/chat.css">
+		<link rel="stylesheet" href="/static/seach/css/history.css" />
+        <link rel="stylesheet" type="text/css" href="/static/fy/css/fy-alert.css">		
+		<link href="/static/showloading/css/loading.css" rel="stylesheet" media="screen" />
+		<link rel="stylesheet" href="/static/swiper/swiper6.5.7.css">
+
+	</head>
+	<body class="body">
+	  <div class="swiper-container" id="swiper-container">       
+       <div class="swiper-wrapper stop-swiping">
+       <!--  第一页 -->
+        <div class="swiper-slide" id="sw01" data-hash="slide1">
+			<a href="/"><img src="/static/seach/img/back.png" style="position: absolute;top:1.7rem;left: 1rem;" /></a>
+			<img src="/static/seach/img/icon_search.png" style="position: absolute;top:1.9rem;left:4rem;width:1.6rem;height:1.6rem;" />
+			<input class="" id="idNumber1"  style="margin-top:1.5rem;margin-left:3rem;outline-style: none;background-color: #eee;text-indent:3rem;text-overflow:ellipsis;">
+
+			<button id="search" style="background: #10AED5;color: #fff;border: none;border-radius: 5px;">搜索</button>
+			<div class="info">
+			      <div class="info-box">
+	                    <!-- <div class="info-message" onclick="" ><div  class="info-message-id-num"><img class="info-message-head-max" src="+head_img+" alt="头像"/></div><div class="info-message-id-info"><p>"+username+"</p><p>"+sign+"</p></div>
+                        <div style="">
+                	 
+	                 	 <button class=\"copy\" style=\"float:right;margin-right: 10px;margin-top: 17px;margin-bottom: 15px;width:80px;height: 35px;border: none;border-radius: 8px;background:#10AED5;color: #fff\"data-clipboard-text=\"\">添加好友</button>  
+	                    </div>
+	                    </div> -->
+
+	              </div>
+                  
+			</div> 
+	        <div class="history-class" >
+			<p class="p" style="margin-top: .5rem;border-top: 1px solid #9A9A9A;font-family: '微软雅黑';">搜索记录</p>
+
+			<div class="delete history" style="width: 100%;margin-top: -1rem;">
+			</div>
+
+			<div class="history" id="his-dele"><img src="/static/seach/img/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;"/>清除记录</div></div>
+		 <!--清空历史记录-->
+		</div> 	
+		 <!-- 第二页 -->
+       <!-- <div class="swiper-slide red-slide" id="sw02">
+          <!-好友信息-
+          <div id="userinfo" style="text-align:center;padding:10px;">
+
+          	<div class="div-father" style="border: none;border-radius: 8px;background:#EDEDED;">
+                 <div style="margin:10px;">
+                 	<div style="border-bottom: 1px solid #000;">用户资料</div>
+                 	<img style="float:left;height: 50px;width:50px;" src="/static/img/login.png">
+                 	<span style="float:left">名字</span>
+                 	<span style="float:left">签名</span>
+                 	
+                 </div>
+                 <div>111</div>
+                 <div class="div-son">
+                     <div style="text-align: center;left:33px;padding-top: 10px;">
+                	 
+                 	 <button class="copy" style="margin-top:10px;margin-bottom:20px;width: 220px;height: 40px;border: none;border-radius: 8px;background:#10AED5;color: #fff"data-clipboard-text="">添加好友</button>  
+                     </div>
+                 </div>
+                                    
+            </div>
+             
+          </div>
+        </div> -->
+        <!-- 第三页 -->
+        <div class="swiper-slide" id="sw02" data-hash="slide2">
+        	<a id="return" href="JavaScript:history.back(-1)"><img src="/static/seach/img/back.png" style="position: absolute;left: 1rem;height: 25px;top:17px" /></a> 
+	        <h3 style="text-align: center;vertical-align:middle;">申请添加好友</h3>
+			  <div style="margin: 20px;">
+				<div class="text">
+					<small>发送添加好友申请</small>
+					<div>
+				    <input class="input" id="message"></input>
+				    </div>
+			    </div>
+
+			    <div class="text">
+					<small>设置备注</small>
+					<div>
+				      <input class="input" id="nickname"></input>
+				    </div>
+			    </div>
+
+			    <div class="text">
+				<small>设置好友权限</small><br/>
+				    <div class="div">
+			           <div class="div01" style="border-bottom:1px solid #D2CCCC;">
+			            聊天和朋友圈动态
+			            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+			           </div>
+			           <div class="div01">
+			            仅聊天
+			            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+			           </div>
+			        </div>
+			    </div>
+
+			    <div class="text">
+				<small>朋友圈和状态</small><br/>
+				    <div class="div">
+			           <div class="div01" style="border-bottom:1px solid #D2CCCC;">
+			            不让他看我
+			            <img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+			           </div>
+			           <div class="div01">
+			           	不看他
+			           	<img style="vertical-align:middle;float: right;" src="/static/img/check.png">
+			           </div>
+			        </div>
+			    </div>
+
+			    <div>
+			    	<input class="submit" type="submit" name="" value="发送请求">
+			    </div>
+
+			</div>
+        </div>
+      </div>
+  </div>
+        <script src="/static/seach/js/jquery.min.js"></script>
+		<script src="/static/showloading/js/loading.js"></script>
+		<script src="/static/fy/js/fy-alert.js"></script>
+		<script src="/static/swiper/swiper6.5.7.js"> </script> 
+		<script type="text/javascript">
+			var mySwiper = new Swiper('#swiper-container',{
+			   noSwiping : true,
+			   noSwipingClass : 'stop-swiping',
+			   on: {
+			    slideChangeTransitionStart: function(){
+			      //alert(this.activeIndex);
+			      //当滑动到第一页时改变title
+			      if (this.activeIndex==0) {
+			        $('#title').text("查找用户");
+			      }
+			    },
+			   },
+			    hashNavigation: {
+			     watchState: true,
+			   },
+           });
+
+           $(".info-box").click(function(){
+           	  $('#title').text("用户信息");
+           	   mySwiper.slideNext();
+           })
+		   $("#return").click(function(){
+           	  $('#title').text("用户信息");
+           	   mySwiper.slidePrev();
+           })
+			
+		 	$(document).delegate(".delete>div", "click", function() {
+				$("#idNumber1").val($(this).text());
+			});
+             
+			/*搜索记录相关*/
+			//从localStorage获取搜索时间的数组
+			var hisTime;
+			//从localStorage获取搜索内容的数组
+			var hisItem;
+			//从localStorage获取最早的1个搜索时间
+			var firstKey;
+
+			function init() {
+				//每次执行都把2个数组置空
+				hisTime = [];
+				hisItem = [];
+				//模拟localStorage本来有的记录
+				//localStorage.setItem("a",12333);
+				//本函数内的两个for循环用到的变量
+				var i = 0
+				for(; i < localStorage.length; i++) {
+					if(!isNaN(localStorage.key(i))) {
+						hisItem.push(localStorage.getItem(localStorage.key(i)));
+						hisTime.push(localStorage.key(i));
+					}
+				}
+				i = 0;
+				//执行init(),每次清空之前添加的节点
+				$(".delete").html("");
+				for(; i < hisItem.length; i++) {
+					//alert(hisItem);
+					$(".delete").prepend('<div class="word-break" id=""style=" z-index: 1000;">' + hisItem[i] + '</div>')
+				}
+			}
+
+			init();
+            var id ;
+			$("#search").click(function() {
+
+				var msg = $(".info-userinfo");				
+				msg.remove();
+				
+                $(".history-class").hide();
+				var value = $("#idNumber1").val();
+				var time = (new Date()).getTime();
+
+				if(!value) {
+					fyAlert.msg("请输入要查询的ID或手机号",{icon:2,animateType:2} )
+					return false;
+				}
+
+				//输入的内容localStorage有记录
+				if($.inArray(value, hisItem) >= 0) {
+					for(var j = 0; j < localStorage.length; j++) {
+						if(value == localStorage.getItem(localStorage.key(j))) {
+							localStorage.removeItem(localStorage.key(j));
+						}
+					}
+					localStorage.setItem(time, value);
+				}
+				//输入的内容localStorage没有记录
+				else {
+					//由于限制了只能有6条记录，所以这里进行判断
+					if(hisItem.length > 10) {
+						firstKey = hisTime[0]
+						localStorage.removeItem(firstKey);
+						localStorage.setItem(time, value);
+					} else {
+						localStorage.setItem(time, value)
+					}
+				}
+				init();
+				//正式的时候要提交的！！！
+				//$("#form1").submit()
+				 //显示遮罩
+                loading.showLoading({
+                        type:2,
+                        tip:"获取中"
+                })
+               $.post('index/index/seach',{"id":value}).then(function(res){
+					/*head_img: "/static/img/login.png"
+					  id: 1
+					  phone: "15555555555"
+					  sign: null
+					  status: 0
+					  username: "风流倜傥"*/
+					  //去除遮罩
+					  console.log(res);
+	                  loading.hideLoading();
+					if(res.id ){
+					   var id       = res.id;
+	                   var username = res.username;
+	                   var head_img = res.head_img;	                   
+	                   var sign;  
+	                   if (res.sign==null) {
+	                   	    sign ="无";
+	               
+	                   }else{
+	                   	    sign =res.sign;
+	                   }
+                       var status = res.status;
+	                   if (status==0) {
+	                   	   status ="正常";
+	               
+	                   }else{
+	                   	    status ="封禁";
+	                   }
+	                   var phone = res.phone;             
+	                   var last_login_time = res.last_login_time;
+	                   $(".info-box").append("<div class=\"info-userinfo\" style=\"height: auto;background: #EDEDED;border-radius: 8px;margin:10px;\"><div class=\"info-message\" onclick=\"info("+id+")\" ><div  class=\"info-message-id-num\"><img class=\"info-message-head-max\" src="+head_img+" alt=\"头像\"/></div><div class=\"info-message-id-info\"><p>"+username+"</p><p>"+sign+"</p> </div><button class=\"add-user\" style=\"float:right;margin-right: 10px;margin-top: 17px;margin-bottom: 15px;width:80px;height: 35px;border: none;border-radius: 8px;background:#10AED5;color: #fff\"data-clipboard-text="+id+">添加好友</button></div><div style=\"margin-left: 15px;\">账户状态:"+status+"</div><div style=\"margin-left: 15px;padding-top: 5px;\">手机号:"+phone+"</div><div style=\"margin-left: 15px;padding-top: 5px;padding-bottom: 10px;\">最近登录时间:"+last_login_time+"</div></div>")
+	                }else{	
+	                	$(".history-class").show();
+	                	fyAlert.msg("无数据",{icon:2,animateType:2} )
+
+	                }
+
+               })
+
+			});
+
+			//清除记录功能
+			$("#his-dele").click(function() {
+				var f = 0;
+				for(; f < hisTime.length; f++) {
+					localStorage.removeItem(hisTime[f]);
+				}
+				init();
+			});
+			//苹果手机不兼容出现input无法取值以下是解决方法
+			$(function() {
+				$('.word-break').click(function() {
+					var div = $(this).text();
+					$('#idNumber1').val(div);
+				})
+				//取到值以后button存储无法取值，这里强迫浏览器强行刷新可解决
+				$('#search').click(function() {
+					//window.location.reload();
+				})
+			})
+			function info(id){
+				
+				//将localStorage传递到哪个页面
+				//location.href = '/adduser'
+				//设置localStorage
+				//window.localStorage.setItem('user_id',id);
+			}
+
+	
+			$(".submit").click(function () {
+			    //id = (window.localStorage.getItem('user_id'))
+				var friendid = $(".add-user").attr('data-clipboard-text');
+				var message = $("#message").val();
+				var nickname = $("#nickname").val();
+			    //console.log(message,nickname);
+				$.post("/index/index/friendrequest",{
+					        "friendid":friendid,
+							    "message":message,
+							    "nickname":nickname
+						}).then(function(res){
+			             console.log(res);
+			               if(res.status==0){
+			                    fyAlert.msg(res.msg,{icon:1,animateType:1} )
+			                    //location.href = '/'
+			               }
+			               if(res.status==1||res.status==2){
+			                    fyAlert.msg(res.msg,{icon:3,animateType:3} )
+			                                    
+			               }
+
+
+			            })
+					
+			})
+	    </script>
+	</body>
+
+</html>

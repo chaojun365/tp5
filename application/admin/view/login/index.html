@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <title>Login form with confirmation!</title>
+  <link rel="stylesheet" href="/static/adminlogin/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/fy/css/fy-alert.css">
+  <link href="/static/showloading/css/loading.css" rel="stylesheet" media="screen" />
+</head>
+<body>
+
+
+<div class="overlay"></div>
+
+<div class="container">
+	<div class="loginBox">
+		<div class="userImage">
+			<img src="/static/adminlogin/img/catFace.png">
+		</div>
+		<form id="loginForm">
+			<div class="input-wrapper">
+				<label>手机:</label>
+				<input type="number"  name="" id="moblie" placeholder="请输入手机号">
+				<div class="error-email"><div class="email-msg"></div><div class="triangle"></div></div>
+			</div>
+
+			<div class="input-wrapper">
+				<label>密码:</label>
+				<input type="password" name="" id="password" placeholder="密码">
+				<div class="error-pass"><div class="pass-msg"></div><div class="triangle"></div></div>
+			</div>
+
+			<div class="input-wrapper">
+				<label>验证码:</label>
+				<input style="width: 55%;" type="code" id="code" name="" placeholder="请输入验证码">
+				<span class="sendcode" style="margin-top:-54px; ">发送验证码</span>
+				<div class="error-code"><div class="code-msg"></div><div class="triangle"></div></div>
+			</div>
+
+			<input id="button" type="button" name="" value="登录" onClick="validateForm()">
+
+		</form>
+	</div>
+</div>
+<div class="confirmation showOk">
+	<img src="/static/adminlogin/img/gato.jpg">
+</div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/adminlogin/js/script.js"></script>
+<script src="/static/fy/js/fy-alert.js"></script>
+<script src="/static/showloading/js/loading.js"></script>
+
+</body>
+</html>

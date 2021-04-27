@@ -6,7 +6,10 @@ use think\Request;
  * 
  */
 class Index extends Controller
-{
+{   
+	protected $middleware=[
+      'CheckAdminLogin'
+    ];
     public function index()
     {
        return view();

@@ -402,7 +402,10 @@ class Index extends Controller
         return $status;
           
   }
-
+  public function cesi()
+  {
+    return view();
+  }
   //退出
   public function signout(Request $request){
          $input= $request->post();

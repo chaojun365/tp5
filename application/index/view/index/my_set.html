@@ -289,7 +289,7 @@
     $(document).ready(function () {
         //$(".nick-box").toggle();
         //$("#sw01").toggle();
-       var user_id = (window.localStorage.getItem('user_id'))
+       var user_id = (window.localStorage.getItem('user.id'));
        if (user_id) {
          $.post('/index/index/seach',{"id":user_id}).then(function(res){
                if (res) {

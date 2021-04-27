@@ -32,6 +32,7 @@ Route::rule('miaosha','index/index/miaosha');
 Route::rule('sqlsave','index/index/sqlsave');
 Route::rule('listdel','index/index/listdel');
 
-//Route::rule('admin/login','admin/login/index');
+Route::rule('admin/login/','admin/login/index');
+Route::rule('/admin/index/','admin/index/index');
 //Route::rule('admin/checkuser','admin/index/checkuser');
 

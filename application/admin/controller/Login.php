@@ -58,7 +58,7 @@ class Login extends Controller
     public function signout(Request $request){
          $input=$request->post();
          if($input){
-            session('user.id',null);
+            session('admin.id',null);
             return redirect(url('/login'));
          }
          

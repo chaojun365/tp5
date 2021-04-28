@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="/static/swiper/swiper6.5.7.css">
+    <style>
+      #section{
+      	height: 100px;width: 155px;display: inline-block;margin: 5px;border-radius: 8px;
+      }
+      #real{
+      	height: 40px;width: 140px;display: inline-block;margin: 5px;border-radius: 8px;
+      }
+      .real-number{
+      	font-size: 20px;
+      }
+      .section-text{
+      	padding-top: 20px;color: #fff;
+      }
+      .number{
+      	padding-top: 10px;color: #fff;
+      }
+      #banner{
+      	height: 100px;width: 95%;margin-top:50px;border-radius: 8px;background: #fff
+      }
+      img{
+     	height: 100px;width: 100%
+      }
+    </style>
+</head>
+<body style="background: #F8F9FD">
+<div style="position:fixed;top:0px;width: 100%;height: 40px;background: #3D81FE;text-align: center;background: #F8F9FD">
+	<p>后台管理</p>
+</div>
+<div class="swiper-container" id="banner" style="">
+
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide" style=""><img  src="/static/chat/img/1.png"></div>
+	        <div class="swiper-slide" style=""><img style="" src="/static/chat/img/1.png"></div>
+	    </div>	    
+		
+</div>	
+<div style="width: 100%;text-align: center;margin-top: 10px;background: #fff">
+	<span id="section" style="background: #8D8EFE;">
+       <div class="section-text">用户总量</div>
+       <div class="number">100</div>
+	</span>
+	<span id="section" style="background: #FC8BB9;">
+       <div class="section-text">在线人数</div>
+       <div class="number">100</div>
+	</span>
+	<span id="section" style="background: #FED3C2;">
+       <div class="section-text">今日下单</div>
+       <div class="number">100</div>
+	</span>
+	<span id="section" style="background: #59A4FB;">
+		<div class="section-text">累计交易量</div>
+		<div class="number">100</div>
+	</span>
+</div>
+<div style="width: 100%;margin-top: 10px;background: #fff">
+	<div style="margin-left: 25px"><small>实时概况:</small></div>
+	<span id="real" style="margin-left:25px">
+       <div class="">销售额</div>
+       <div class="real-number" style="">100</div>
+	</span>
+	<span id="real" style="margin-left:25px">
+       <div class="">新增用户</div>
+       <div class="real-number">100</div>
+	</span>
+	<span id="real" style="margin-left:25px">
+       <div class="">支付订单</div>
+       <div class="real-number">100</div>
+	</span>
+	<span id="real" style="margin-left:25px">
+       <div class="">下单人数</div>
+       <div class="real-number">100</div>
+	</span>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/swiper/swiper6.5.7.js"> </script> 
+<script> 
+  var mySwiper = new Swiper('.swiper-container',{
+     direction : 'horizontal',
+     speed:300,
+	 autoplay : {
+	   delay:5000
+	 },
+  })
+</script>
+</body>
+
+</html>
